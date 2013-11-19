@@ -1,0 +1,47 @@
+%h3 Servers
+
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Status
+      %th Action
+      %th
+      %th
+      %th
+ 
+  %tbody
+    - @servers.each do |server|
+      %tr
+        %td= link_to server.name, server_path(server)
+        %td= status_label( server.current_status )
+        %td= server.current_action
+        %td= link_to 'Show', server
+        %td= link_to 'Edit', edit_server_path(server)
+        %td= link_to 'Destroy', server, :method => :delete, :data => { :confirm => 'Are you sure?' }  
+%br
+
+
+- if !@outages.blank?
+
+  %hr
+
+  %h4 Latest Outages
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Server
+        %th Status
+        %th Action
+        %th Time
+  
+    %tbody
+      - @outages.each do |check|
+        %tr
+          %td= link_to check.server.name, server_path(check.server)
+          %td= status_label( check.state )
+          %td= check.action
+          %td= check.created_at
+  

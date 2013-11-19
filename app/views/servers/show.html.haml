@@ -1,0 +1,41 @@
+%p#notice= notice
+
+%h3= @server.name
+
+%p
+  %b Check URL:
+  = link_to @server.url, @server.url, :target => "_blank"
+
+%p 
+  Expected Return Value:
+  %code= @server.return_value
+
+
+- if !@server.checks.blank?
+  
+  %table.table.well.table-striped.table-hover
+  
+    %thead
+      %tr
+        %th State
+        %th Checked
+        %th Action
+
+    %tbody
+      - @checks.each do |check|
+        %tr
+          %td= check.state
+          %td= check.created_at
+          %td= check.action
+
+  = paginate @checks
+
+- else
+
+  %p Waiting to run the first check.
+
+
+
+= link_to 'Edit', edit_server_path(@server)
+\|
+= link_to 'Back', servers_path

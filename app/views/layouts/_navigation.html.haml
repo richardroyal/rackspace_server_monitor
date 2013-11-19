@@ -1,0 +1,52 @@
+= link_to "Server Monitor", root_path, :class => 'brand'
+%ul.nav.pull-right
+
+
+  - if user_signed_in?
+
+    %li
+      - api_restart = BooleanSetting.get_setting( "API Restarts", true, false )
+      %a{ :href => edit_boolean_setting_path( api_restart ) }
+        - if api_restart.value
+          %span.badge.badge-success= "Restarts: ON"
+        - else
+          %span.badge.badge-important= "Restarts: OFF"
+  
+  
+    %li.dropdown
+      %a.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown"}
+        Settings
+        %b.carret
+      %ul.dropdown-menu{:role => "menu"}
+        %li{ :role => "presentation"}
+          = link_to 'New Server', new_server_path, :class => "dr"
+        %li{ :role => "presentation"}
+          = link_to 'Rackspace Servers', available_servers_path, :class => "dr"
+        %li{ :role => "presentation"}
+          = link_to 'API Settings', settings_path, :class => "dr"
+  
+  
+
+  %li.divider-vertical
+  
+  %li.dropdown
+    %a.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown"}
+      Account
+      %b.carret
+    %ul.dropdown-menu{:role => "menu"}
+      - if user_signed_in?
+        %li
+          = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+      - else
+        %li
+          = link_to 'Login', new_user_session_path
+      -# if user_signed_in?
+        %li
+          = link_to 'Edit account', edit_user_registration_path
+        - if current_user.has_role? :admin
+          %li
+            = link_to 'Admin', users_path
+      - elsif devise_mapping.registerable? && controller_name != 'registrations'
+        %li
+          = link_to 'Sign up', new_user_registration_path
+    

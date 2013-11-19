@@ -1,0 +1,51 @@
+%h1 API Settings
+
+%table.table.well
+  %thead
+    %tr
+      %th Key
+      %th Value
+      %th Description
+      %th
+
+  %tbody
+    %tr
+      %td Rackspace API Username
+      %td= @rackspace_api_username.blank? ? "Not setup" : @rackspace_api_username
+      %td From application.yml
+      %td
+  
+    %tr
+      %td Rackspace API Key
+      %td= @rackspace_api_key.blank? ? "Not setup" : @rackspace_api_key
+      %td From application.yml
+      %td
+
+    %tr
+      %td Secret Key
+      %td= @secret_key.blank? ? "Not setup" : @secret_key
+      %td 
+        From application.yml. 
+      %td
+        = link_to "Scan Now", check_all_servers_path( @secret_key ), :target => "_blank", :class => "btn btn-mini"
+
+
+    %tr
+      - records = Setting.get_setting("Max Check Records", "100000", false)
+      %td Maximum Check Records allowed
+      %td= records.value
+      %td Continually delete old checks to keep database size down.
+      %td= link_to 'Edit', edit_setting_path( records.id ), :class => "btn btn-mini"
+
+
+    - @boolean_settings.each do |setting|
+      %tr
+        %td= setting.key
+        %td
+          - if setting.value
+            %span.label.label-success= "True"
+          - else
+            %span.label.label-important= "False"
+        %td
+        %td= link_to 'Edit', edit_boolean_setting_path(setting), :class => "btn btn-mini"
+

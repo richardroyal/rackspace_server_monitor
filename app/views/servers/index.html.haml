@@ -1,0 +1,21 @@
+%h1 Listing servers
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th URI
+    %th
+    %th
+    %th
+
+  - @servers.each do |server|
+    %tr
+      %td= server.name
+      %td= link_to server.url, server.url, :target => "_blank"
+      %td= link_to 'Show', server
+      %td= link_to 'Edit', edit_server_path(server)
+      %td= link_to 'Destroy', server, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Server', new_server_path

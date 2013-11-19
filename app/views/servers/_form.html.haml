@@ -1,0 +1,16 @@
+= simple_form_for(@server) do |f|
+  = f.error_notification
+
+  .row
+    .span5
+      .form-inputs
+        = f.input :name, label: "Server Name:", input_html: { class: 'span5' }
+        = f.input :url, label: "URL", input_html: { class: 'span5' }
+        = f.input :return_value, label: "Return Value:", input_html: { class: 'span5' }
+        = f.input :rackspace_id, label: "Rackspace ID:", input_html: { class: 'span5' }
+
+    .span7
+      = render "/servers/rackspace_servers_table", :servers => @rackspace_servers
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-success'

@@ -1,0 +1,19 @@
+- if @rackspace_servers.is_a?(String) and @rackspace_servers == "invalid api key"
+
+  %h2 Setup Rackspace API credentials in application.yml
+  %p The Rackspace API credentials in application.yml are incorrect or Rackspace API is offline.
+  %p 
+    See 
+    = link_to "Rackspace System Status", "https://status.rackspace.com/", :target => "_blank"
+
+- else 
+
+  %h3 Rackspace API Enabled Servers
+
+  - if !@rackspace_servers.blank?
+
+    = render "/servers/rackspace_servers_table", :servers => @rackspace_servers 
+
+  - else
+
+    %p No Rackspace API enable servers currently active in account.

@@ -1,0 +1,8 @@
+- if @key.blank?
+  %h2 Please setup your secret key in application.yml
+
+- elsif @key != params[:secure_key]
+  %h2 Incorrect secret key in URL.
+
+- else
+  = "[SERVER CHECK LOG]: #{Time.now}\n"

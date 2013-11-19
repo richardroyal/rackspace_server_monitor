@@ -1,0 +1,17 @@
+# Add account credentials and API keys here.
+# All variables are required.
+
+
+# The easiest/cheapest way to automaically check all servers is
+# to ping /check-all-servers/:secret_key
+SECRET_KEY: XXXXXXXXXXXXXXXXXXXXXXXX
+
+# Rackspace API Credentials
+RACKSPACE_API_USERNAME: XXXXXXXXXXXX
+RACKSPACE_API_KEY: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+# Sending Alerts through Gmail
+GMAIL_USERNAME: XXXX@XXXXXXXXXX.XXX
+GMAIL_PASSWORD: XXXXXXXXXXXX
+

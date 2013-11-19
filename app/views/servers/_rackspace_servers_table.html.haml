@@ -1,0 +1,21 @@
+- if !servers.blank?
+
+  - if servers.is_a?(Array)
+    %table.table.table-hover.table-striped.well
+      %thead
+        %tr
+          %th #
+          %th Rackspace Server Name
+          %th Rackspace API Server ID
+          %th Associated Record
+      %tbody
+        - servers.each_with_index do |s, i|
+          %tr
+            %td= (i.to_i + 1).to_s
+            %td= s.name
+            %td= s.id
+            %td= list_associated_rackspace_servers( s.id )
+ 
+  - elsif servers.is_a?(String)
+    %p There was an error communicating with Rackspace. Check your API keys.
+    

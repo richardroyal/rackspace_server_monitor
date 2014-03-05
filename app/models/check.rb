@@ -27,11 +27,15 @@ class Check < ActiveRecord::Base
   #  Always ...
   #     - the new check state is the returned value from s.check.
   def self.run
+    puts "---------------------------------------------------------"
+    puts "Checking all Servers #{Time.now}"
   
     send_restart = BooleanSetting.get_setting( "API Restarts" )
     Check.manage_check_records_database_size
 
     Server.all.each do |s|
+
+      puts "Checking: #{s.name} (#{s.url})"
 
       previous_state = s.checks.first
       new_state = s.check
@@ -68,6 +72,7 @@ class Check < ActiveRecord::Base
         s.save
       end
     end
+    puts "---------------------------------------------------------"
   end
 
 

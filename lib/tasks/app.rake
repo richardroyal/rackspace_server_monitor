@@ -26,6 +26,12 @@ namespace :app do
   end
 
 
+  desc "Check all servers"
+  task :check_all_servers => :environment do
+    Check.run
+  end
+
+
 
 
   desc "Run all launch tasks"
